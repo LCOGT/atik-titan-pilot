@@ -12,7 +12,7 @@ from artemishsc import *
 
 
 EXPOSURE_TIME = 1.0
-DEFAULT_DEVICE = -1
+DEVICE_NUMBER = 0
 FITS_FILENAME = 'titan.fits'
 DTYPE_PIXEL = numpy.uint16
 DIVIDER = '-' * 40
@@ -32,12 +32,14 @@ if not dll_loaded:
     sys.exit(1)
 print
 
-titan = ArtemisConnect(DEFAULT_DEVICE)
-_, device_name = ArtemisDeviceName(1)
-_, device_serial_number = ArtemisDeviceSerial(DEFAULT_DEVICE)
+titan = ArtemisConnect(DEVICE_NUMBER)
+device_name = ArtemisDeviceName_pythonString(DEVICE_NUMBER)
+device_serial_number = ArtemisDeviceSerial_pythonString(DEVICE_NUMBER)
+device_api_version = ArtemisAPIVersion()
 print 'General Properties'
 print DIVIDER
-print 'Artemis API Version: ', ArtemisAPIVersion()
+print 'Artemis API Version: ', device_api_version
+
 print 'Device Name: ', device_name
 print 'Device Serial Number: ', device_serial_number
 print
@@ -107,7 +109,7 @@ header_primary['EXTEND'] = 'T'
 header_primary['DATATYPE'] = 'INTEGER*2'
 header_primary['DATATYPE'] = 'INTEGER*2'
 header_primary['TELESCOP'] = 'N/A'
-header_primary['INSTRUME'] = 'Atik Titan'
+header_primary['INSTRUME'] = format('%s [%d]' % (device_name, device_api_version))
 header_primary['OBJECT'] = 'N/A'
 header_primary['OBJECT2'] = '_'
 header_primary['ORIGIN'] = 'Las Cumbres Observatory'

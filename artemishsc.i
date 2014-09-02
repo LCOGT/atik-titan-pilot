@@ -29,12 +29,24 @@ int ArtemisGetSubframe(ArtemisHandle hCam, int *x, int *y, int *w, int *h);
 %apply int *OUTPUT { int *x, int *y };
 int ArtemisGetBin(ArtemisHandle hCam, int *x, int *y);
 
-%apply bool *OUTPUT { char *pName };
-bool ArtemisDeviceName(int device, char *pName);
-bool ArtemisDeviceSerial(int device, char *pName);
-
 %apply int *OUTPUT { ARTEMISCOLOURTYPE *colourType, int *normalOffsetX, int *normalOffsetY, int *previewOffsetX, int *previewOffsetY };
 int ArtemisColourProperties(ArtemisHandle hCam, ARTEMISCOLOURTYPE *colourType, int *normalOffsetX, int *normalOffsetY, int *previewOffsetX, int *previewOffsetY);
+
+%inline %{
+
+    PyObject *ArtemisDeviceName_pythonString(int device) {
+        char device_name[40];
+        ArtemisDeviceName(device, device_name);
+        return PyString_FromString(device_name);
+    }
+
+    PyObject *ArtemisDeviceSerial_pythonString(int device) {
+        char device_serial[40];
+        ArtemisDeviceSerial(device, device_serial);
+        return PyString_FromString(device_serial);
+    }
+
+%}
 
 
 //
