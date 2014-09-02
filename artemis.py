@@ -4,6 +4,7 @@ import sys
 import getpass
 import warnings
 import os
+import pprint
 import numpy
 import pyfits
 
@@ -16,6 +17,7 @@ FITS_FILENAME = 'titan.fits'
 DTYPE_PIXEL = numpy.uint16
 DIVIDER = '-' * 40
 
+pp = pprint.PrettyPrinter()
 
 def formatted_file_size_kilobytes(input_file):
     size_in_bytes = os.path.getsize(input_file)
@@ -29,15 +31,15 @@ print 'DLL loaded: ', dll_loaded
 if not dll_loaded:
     sys.exit(1)
 print
-print
 
 titan = ArtemisConnect(DEFAULT_DEVICE)
-
+_, device_name = ArtemisDeviceName(1)
+_, device_serial_number = ArtemisDeviceSerial(DEFAULT_DEVICE)
 print 'General Properties'
 print DIVIDER
 print 'Artemis API Version: ', ArtemisAPIVersion()
-# print 'Device Name: ', ArtemisDeviceName(DEFAULT_DEVICE)
-# print 'Device Serial Number: ', ArtemisDeviceSerial(DEFAULT_DEVICE)
+print 'Device Name: ', device_name
+print 'Device Serial Number: ', device_serial_number
 print
 
 _, colour_type, normal_offset_x, normal_offset_y, preview_offset_x, preview_offset_y = ArtemisColourProperties(titan)
@@ -50,7 +52,7 @@ print 'Preview Offset X: ', preview_offset_x
 print 'Preview Offset Y: ', preview_offset_y
 print
 
-print 'Exposure'
+print 'Initialization & Settings'
 print DIVIDER
 
 # print 'Bin Data: ', ArtemisGetBin(titan)
@@ -61,17 +63,21 @@ if not connected:
     raise Exception('device is not connected')
 
 camera_properties = ArtemisProperties_pythonDictionary(titan)
-print camera_properties
+print 'Camera Properties: ', pp.pprint(camera_properties)
+print
 
-print 'Starting exposure'
+print 'Exposure'
+print DIVIDER
+
+print 'Exposure time: ', EXPOSURE_TIME
+
 ArtemisStartExposure(titan, EXPOSURE_TIME)
-
 while not ArtemisImageReady(titan):
     time.sleep(0.5)
 
 now = datetime.date.today()
 observation_timestamp = datetime.datetime.fromtimestamp(time.time()).isoformat()
-print 'Exposure complete'
+print 'Observation timestamp: ', observation_timestamp
 
 percent_done = 0
 print 'Download % completed: ', percent_done
@@ -145,6 +151,7 @@ try:
     hdu_list.info()
 finally:
     hdu_list.close()
+print
 
 print DIVIDER
 print 'Done.'
