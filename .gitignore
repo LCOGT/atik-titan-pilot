@@ -57,3 +57,4 @@ build
 artemishsc.py
 lib/*.pyd
 *.fits
+.idea/
