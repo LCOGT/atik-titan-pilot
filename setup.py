@@ -6,6 +6,7 @@ import os
 base_dir = os.path.dirname(os.path.realpath(__file__))
 
 module_artemishsc = Extension("_artemishsc", ["artemishsc.i", "ArtemisHscAPI.cpp"],
+                              define_macros=[('DEBUG', True)],
                               include_dirs=[r"c:\Python27\Lib\site-packages\numpy\core\include"],
                               library_dirs=[
                                   r"c:\Python27\libs",

@@ -40,7 +40,9 @@ int ArtemisGetImageData(ArtemisHandle hCam, int *x, int *y, int *w, int *h, int 
         printf("ArtemisGetImageArray_unsignedShort: uiImageArray allocated\n");
 
         for (int pixel = 0; pixel < pixels; pixel++) {
-            // printf("at pixel [%06d]: ui[%p]/ia[%p]: %hd\n", pixel, &uiImageArray[pixel], &imageArray[pixel], imageArray[pixel].uiVal);
+#ifdef DEBUG
+            printf("at pixel [%06d]: ui[%p]/ia[%p]: %hd\n", pixel, &uiImageArray[pixel], &imageArray[pixel], imageArray[pixel].uiVal);
+#endif
             uiImageArray[pixel] = imageArray[pixel].uiVal;
         }
         printf("ArtemisGetImageArray_unsignedShort: pixels converted\n");

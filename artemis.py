@@ -64,7 +64,7 @@ try:
         image_buffer = numpy.asarray(a=ArtemisGetImageArray_pythonList(titan), order='C')
         print 'Image Buffer stdev: ', numpy.nanstd(image_buffer)
         print 'Image Buffer mean:', numpy.mean(image_buffer)
-        image_array = numpy.asarray(numpy.reshape(image_buffer, (w, h)), dtype=dtype_pixel, order='C')
+        image_array = numpy.rot90(numpy.asarray(numpy.reshape(image_buffer, (w, h)), dtype=dtype_pixel, order='C'))
 
         print
         print 'Creating FITS file'
@@ -76,8 +76,8 @@ try:
         header_primary['BITPIX'] = 16
         header_primary['BYTEORDR'] = 'BIG_ENDIAN'
         header_primary['NAXIS'] = 2
-        header_primary['NAXIS1'] = w
-        header_primary['NAXIS2'] = h
+        header_primary['NAXIS1'] = h
+        header_primary['NAXIS2'] = w
         header_primary['EXTEND'] = 'T'
         header_primary['DATATYPE'] = 'INTEGER*2'
         header_primary['DATATYPE'] = 'INTEGER*2'
