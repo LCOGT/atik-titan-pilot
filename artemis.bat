@@ -1,6 +1,6 @@
 @echo off
 
-cd c:\Users\eng\workspace\titan
+cd c:\Users\%USERNAME%\workspace\titan
 
 cls
 

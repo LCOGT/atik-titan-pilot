@@ -56,3 +56,4 @@ build
 *_wrap.c
 artemishsc.py
 lib/*.pyd
+*.fits
