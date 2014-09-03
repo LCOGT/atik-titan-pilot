@@ -5,6 +5,7 @@ import getpass
 import warnings
 import os
 import pprint
+
 import numpy
 import pyfits
 
@@ -18,6 +19,7 @@ DTYPE_PIXEL = numpy.uint16
 DIVIDER = '-' * 40
 
 pp = pprint.PrettyPrinter()
+
 
 def formatted_file_size_kilobytes(input_file):
     size_in_bytes = os.path.getsize(input_file)
