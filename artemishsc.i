@@ -22,15 +22,32 @@
 //
 %apply int *OUTPUT { int *x, int *y, int *w, int *h, int *binx, int *biny };
 int ArtemisGetImageData(ArtemisHandle hCam, int *x, int *y, int *w, int *h, int *binx, int *biny);
+%clear int *x, int *y, int *w, int *h, int *binx, int *biny;
 
 %apply int *OUTPUT { int *x, int *y, int *w, int *h };
 int ArtemisGetSubframe(ArtemisHandle hCam, int *x, int *y, int *w, int *h);
+%clear int *x, int *y, int *w, int *h;
 
 %apply int *OUTPUT { int *x, int *y };
 int ArtemisGetBin(ArtemisHandle hCam, int *x, int *y);
+%clear int *x, int *y;
 
 %apply int *OUTPUT { ARTEMISCOLOURTYPE *colourType, int *normalOffsetX, int *normalOffsetY, int *previewOffsetX, int *previewOffsetY };
 int ArtemisColourProperties(ArtemisHandle hCam, ARTEMISCOLOURTYPE *colourType, int *normalOffsetX, int *normalOffsetY, int *previewOffsetX, int *previewOffsetY);
+%clear ARTEMISCOLOURTYPE *colourType, int *normalOffsetX, int *normalOffsetY, int *previewOffsetX, int *previewOffsetY;
+
+%apply int *OUTPUT { int *temperature };
+int ArtemisTemperatureSensorInfo(ArtemisHandle hCam, int sensor, int *temperature);
+%clear int *temperature;
+
+%apply int *OUTPUT { int *flags, int *level, int *minlvl, int *maxlvl, int *setpoint };
+int ArtemisCoolingInfo(ArtemisHandle hCam, int *flags, int *level, int *minlvl, int *maxlvl, int *setpoint);
+%clear int *flags, int *level, int *minlvl, int *maxlvl, int *setpoint;
+
+%apply int *OUTPUT { int *flags, int *serial };
+int ArtemisCameraSerial(ArtemisHandle hCam, int *flags, int *serial);
+%clear int *flags, int *serial;
+
 
 %inline %{
 
