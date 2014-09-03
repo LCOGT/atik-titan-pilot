@@ -31,9 +31,12 @@ Functions that take pointers for use as return values have been modified.
     <tr>
         <td><code>ArtemisGetImageData</code></td>
         <td>
-            <code>```python
+            <code>
+            
+            ```python
                 return_code, x, y, w, h, bin_x, bin_y = ArtemisGetImageData(device_handle)
-            ```</code>
+            ```
+            </code>
         </td>
     </tr>
     <tr>
