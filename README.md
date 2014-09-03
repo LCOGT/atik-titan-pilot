@@ -33,9 +33,10 @@ Functions that take pointers for use as return values have been modified.
         <td>
             <code>
             
-            ```python
-                return_code, x, y, w, h, bin_x, bin_y = ArtemisGetImageData(device_handle)
-            ```
+```python
+return_code, x, y, w, h, bin_x, bin_y = ArtemisGetImageData(device_handle)
+```
+
             </code>
         </td>
     </tr>
