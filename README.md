@@ -137,16 +137,11 @@ The following functions are unimplemented, or not recommended.
         <th>Name</th>
         <th>Reason</th>
     </tr>
-    
     <tr><td><code>ArtemisFTName</code></td><td>Deprecated</td></tr>
     <tr><td><code>ArtemisFTSerial</code></td><td>Deprecated</td></tr>
     <tr><td><code>ArtemisGetImageArray</code></td><td>Unknown behavior. Replaced by <code>ArtemisImageBuffer_pythonList</code></td></tr>
     <tr><td><code>ArtemisSendPeripheralMessage</code></td><td>Diagnostic method: currently unnecessary</code></td></tr>
-    <tr><td><code>ArtemisGetDescription</code></td><td>Diagnostic method: currently unnecessary</code></td></tr>
     <tr><td><code>ArtemisIsLicensed</code></td><td>Diagnostic method: currently unnecessary</code></td></tr>
-    <tr><td><code>ArtemisDiagnosticInputVoltage</code></td><td>Diagnostic method: currently unnecessary</code></td></tr>
-    <tr><td><code>ArtemisTemperatureSensorInfo</code></td><td>Diagnostic method: currently unnecessary</code></td></tr>
-    <tr><td><code>ArtemisCameraSerial</code></td><td>Diagnostic method: currently unnecessary</code></td></tr>
 </table>
 All of these methods may be implemented by modifying the <code>artemishsc.i</code>. For example, given <code>int example(float *response)</code>:
 <div>
