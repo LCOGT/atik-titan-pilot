@@ -94,7 +94,7 @@ print
 print 'FITS File Generation'
 print DIVIDER
 image_buffer = ArtemisImageBuffer_pythonList(titan)
-image_array = numpy.rot90(numpy.asarray(numpy.reshape(image_buffer, (w, h)), dtype=DTYPE_PIXEL, order='C'))
+image_array = numpy.transpose(numpy.asarray(numpy.reshape(image_buffer, (w, h)), dtype=DTYPE_PIXEL, order='C'))
 
 user = getpass.getuser()
 
