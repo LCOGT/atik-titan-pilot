@@ -5,7 +5,7 @@ Summary
 -------
 This project contains all the components for performing an LCOGT pilot test of the Atik Titan camera.
 
-The goals is to wrap the C/C++ Atik/Artemis code in Python.
+The goals is to wrap the C/C++ Artik/Artemis code in Python.
 
 To build:
 
@@ -32,11 +32,7 @@ Functions that take pointers for use as return values have been modified.
         <td><code>ArtemisGetImageData</code></td>
         <td>
             <code>
-            
-```python
-return_code, x, y, w, h, bin_x, bin_y = ArtemisGetImageData(device_handle)
-```
-
+                return_code, x, y, w, h, bin_x, bin_y = ArtemisGetImageData(device_handle)
             </code>
         </td>
     </tr>
