@@ -178,6 +178,50 @@ Files
 
 - - -
 
+Installation & Setup
+--------------------
+Steps:
+
+1. Install the [Atik USB Drivers](http://www.atik-cameras.com/external/Website/Downloads/AtikDrivers.zip)
+1. Install the [Artemis Universal Package](http://www.atik-cameras.com/external/Website/Downloads/SetupArtemisUniversal.exe) (e.g. SDK, DLLs)
+1. Install the [Anaconda Python Environment](http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-2.0.1-Windows-x86_64.exe)
+1. Install [SWIG for Windows](http://prdownloads.sourceforge.net/swig/swigwin-3.0.2.zip)
+1. Install [Minimal GNU for Windows 32-bit (MinGW)](http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download)
+1. Install the [Git Version Control System](http://git-scm.com/download/win)
+1. Update the `PATH` environment variable to point to the following directories:
+	1. `c:\MinGW\mingw32\bin`
+	1. `c:\Program Files\swigwin-xxx`
+	1. `c:\Anaconda`
+	1. `c:\Anaconda\Scripts`
+	1. `c:\Program Files (x86)\Git\bin`
+	1. `c:\Program Files (x86)\Git\cmd`
+1. Set the `PYTHONHOME` environment variable to `c:\Anaconda`
+1. Update the `PYTHONPATH` environment variable to the following directories:
+	1. `%PYTHONHOME%\Lib`
+	1. `%PYTHONHOME%\DLLs`
+	1. `%PYTHONHOME%\libs`
+	1. `%HOMEPATH%\workspace\titan`
+1. Checkout the project:
+	1. From your home directory: `mkdir workspace`
+	1. `cd workspace`
+	1. Ensure you have a SSH key and that Github has it installed: see [Generating SSH Keys](https://help.github.com/articles/generating-ssh-keys)
+	1. Checkout the project: `git clone git@github.com:LCOGT/atik-titan-pilot.git titan`
+	1. Modify the Python environment. Sadly, there is a small incompatibility within the Python library `distutils` module. To fix this, do the following:
+		1. Open `%PYTHONHOME%\Lib\distutils\cygwinccompiler.py`
+		1. Search for the `Mingw32CCompiler` class
+		1. Find the `self.set_executables` method call
+		1. Within the call's parameters, change all `gcc` values to `g++`
+		1. Within the same class, make sure all `no_cygwin` variables are the empty string.
+		1. Within the overall file, search for `extra_preargs.extend`, replace all `--output-lib` strings to `-o`
+1. Try a test build;
+	1. From PowerShell change into the `%HOMEPATH%\workspace\titan` directory
+	1. Execute: `build.bat`
+	1. If the build is successful run the test program:
+		1. Ensure the camera's USB cable is connected
+		1. Execute `artemis.bat`
+		1. If the execution is successful, view the resultant `artemis.fits` file
+		
+
 Reference
 ---------
 
