@@ -76,6 +76,7 @@ print DIVIDER
 print 'Exposure time: ', EXPOSURE_TIME
 
 ArtemisStartExposure(titan, EXPOSURE_TIME)
+time.sleep(EXPOSURE_TIME)
 while not ArtemisImageReady(titan):
     time.sleep(0.5)
 
@@ -96,26 +97,25 @@ print
 print 'FITS File Generation'
 print DIVIDER
 image_buffer = ArtemisImageBuffer_pythonList(titan)
-image_array = numpy.transpose(numpy.asarray(numpy.reshape(image_buffer, (w, h)), dtype=DTYPE_PIXEL, order='C'))
+image_array = numpy.asarray(numpy.reshape(image_buffer, (w, h)), dtype=DTYPE_PIXEL, order='C')
 
 user = getpass.getuser()
 
 header_primary = pyfits.Header()
 header_primary['SIMPLE'] = 'T'
 header_primary['BITPIX'] = 16
-header_primary['BYTEORDR'] = 'BIG_ENDIAN'
+#header_primary['BYTEORDR'] = 'BIG_ENDIAN'
 header_primary['NAXIS'] = 2
 header_primary['NAXIS1'] = h
 header_primary['NAXIS2'] = w
 header_primary['EXTEND'] = 'T'
-header_primary['DATATYPE'] = 'INTEGER*2'
-header_primary['DATATYPE'] = 'INTEGER*2'
+#header_primary['DATATYPE'] = 'INTEGER*2'
 header_primary['TELESCOP'] = 'N/A'
 header_primary['INSTRUME'] = format('%s [%d]' % (device_name, device_api_version))
 header_primary['OBJECT'] = 'N/A'
 header_primary['OBJECT2'] = '_'
 header_primary['ORIGIN'] = 'Las Cumbres Observatory'
-header_primary['FEXPTIME'] = int(EXPOSURE_TIME * 1000)
+#header_primary['FEXPTIME'] = int(EXPOSURE_TIME * 1000)
 header_primary['DATE'] = observation_timestamp
 header_primary['DATE-OBS'] = observation_timestamp
 header_primary['BSCALE'] = 1
@@ -156,6 +156,9 @@ try:
 finally:
     hdu_list.close()
 print
+
+ArtemisDisconnectAll()
+ArtemisUnLoadDLL()
 
 print DIVIDER
 print 'Done.'
