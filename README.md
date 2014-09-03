@@ -15,7 +15,7 @@ To build:
 To run test program:
 
     c:\<project-dir>\artemis.bat
-![](docs\atik-titan-pilot-overview.png)
+![](docs/atik-titan-pilot-overview.png)
     
 Special Functions
 -----------------
